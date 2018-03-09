@@ -1,0 +1,33 @@
+<section class="container">
+    <div class="row">
+        <p class='alert alert-info' *ngIf='mensagem'>{{mensagem}}</p>
+        <form class="col-sm-6" (submit)='salvar()' [formGroup]='meuForm'  >
+            <div class="form-group">
+                <label>Título</label>
+                <input autocomplete='off' formControlName='titulo'  name='titulo' [(ngModel)]='foto.titulo' class="form-control" >
+                <span *ngIf='meuForm.controls.titulo.dirty &&   meuForm.controls.titulo.errors?.required'  class='form-control alert-danger'>Titulo Obrigatório</span>
+                <span *ngIf='meuForm.controls.titulo.dirty && meuForm.controls.titulo.errors?.minlength'  class='form-control alert-danger'>O titulo deve ser 3 digitos</span>
+            </div>
+            <div class="form-group">
+                <label>URL</label>
+                <input  formControlName='url' name='url'  [(ngModel)]='foto.url'  class="form-control">
+                <span *ngIf='meuForm.controls.url.touched &&   meuForm.controls.url.errors?.required'   class='form-control alert-danger'>URL Obrigatório</span>
+            </div>
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea formControlName='descricao'  name='descricao' [(ngModel)]='foto.descricao' class="form-control">
+                </textarea>
+                <span *ngIf='meuForm.controls.descricao.touched &&   meuForm.controls.descricao.errors?.required'  class='form-control alert-danger'>Descricao Obrigatória</span>
+            </div>
+
+            <a [routerLink]="['']" class="btn btn-default">Voltar</a>
+
+            <button  [disabled]='meuForm.invalid' type="submit" class="btn btn-primary">
+                Salvar
+            </button>
+        </form>
+    </div>
+    <aside class="col-sm-4">
+        <!-- Preview do cadastro aqui -->
+    </aside>
+</section>
